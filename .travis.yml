@@ -4,18 +4,32 @@ language: java
 cache:
   directories:
   - $HOME/.m2
+  - ~/.ansible/roles
+  pip: true
+  apt: true
+
+before_script:
+ - sudo apt-get update -q
+ - sudo apt-get install -q python-pip 
+ - pip install --upgrade --user ansible
+ - ansible --version
+ - ansible-galaxy install -r ansible/requirements.yml
+ - ansible-playbook -i localhost ansible/install_packer.yml 
+# Travis doesn't provide Ubuntu 18+ yet
+# which includes Packer in apt repository
 
 install:
- - ./app/mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+ - cd app && ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 jobs:
  include:
 
   - stage: test
     name: Test App
-    script: ./app/mvnw test -B
+    before_script: skip # needs change
+    script: ./mvnw test -B
 
   - stage: deploy
-    name: bonkers
+    name: Build Golden Image AMI
     install: skip # maybe needs change  
-    script: echo "go bonkers"
+    script: make bake

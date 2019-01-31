@@ -1,0 +1,9 @@
+
+---
+
+- hosts: all
+  become: true
+  roles:
+    - { role: 'geerlingguy.ansible-role-packer', tags: ['packer'] }
+
+
