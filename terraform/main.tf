@@ -36,7 +36,9 @@ resource "aws_elb" "web-elb" {
 
 resource "aws_autoscaling_group" "web-asg" {
   availability_zones   = ["${split(",", var.availability_zones)}"]
-  name                 = "opstest-sta-asg"
+  # Dynamic name to ensure ASG is recreated during deployments
+  # and, therefore a  whole new cluster will be deployed using last AMI
+  name                 = "${aws_launch_configuration.worker.name}-asg"
   max_size             = "${var.asg_max}"
   min_size             = "${var.asg_min}"
   desired_capacity     = "${var.asg_desired}"
