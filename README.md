@@ -1,6 +1,5 @@
 
-# Java AWS CICD Pipeline Demo	
-
+# Java AWS CICD Pipeline Demo [![Build Status](https://travis-ci.com/Lusitaniae/java-aws-cicd.svg?branch=master)](https://travis-ci.com/Lusitaniae/java-aws-cicd)
 
 
 ## Get Started
@@ -53,3 +52,5 @@ On commit and or PR, a pipeline with 2 stages is started.
 
 S3 is used to store Terraform state between executions (from CI or locally).
 See required permissions here https://www.terraform.io/docs/backends/types/s3.html#protecting-access-to-workspace-state
+
+Each commit is generating new AMIs, needs lifecycle management tool.
