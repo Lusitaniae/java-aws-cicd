@@ -45,7 +45,6 @@ resource "aws_autoscaling_group" "web-asg" {
   # Use ELB healthchekc to determine state
   health_check_grace_period = 200
   health_check_type         = "ELB"
-  force_delete         = true
   launch_configuration = "${aws_launch_configuration.web-lc.name}"
   load_balancers       = ["${aws_elb.web-elb.name}"]
 
