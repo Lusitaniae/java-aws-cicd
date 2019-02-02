@@ -47,7 +47,7 @@ resource "aws_autoscaling_group" "web-asg" {
   health_check_type         = "ELB"
   launch_configuration = "${aws_launch_configuration.web-lc.name}"
   load_balancers       = ["${aws_elb.web-elb.name}"]
-
+  wait_for_elb_capacity = "${var.asg_desired}"
   #vpc_zone_identifier = ["${split(",", var.availability_zones)}"]
   tag {
     key                 = "Name"
