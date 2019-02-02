@@ -48,6 +48,25 @@ On commit and or PR, a pipeline with 2 stages is started.
 	1. Build AMI using Packer (Ansible does the configuration)
 	2. Deploy new AMI to ASG using Terraform.
 
+Deployments are fully online.
+
+1. A new launch configuration is created with the newly baked AMI.
+2. ASG is attached the new launch configuration
+3.  The default ASG termination policy will now start creating new instances using the new AMI and destroying old ones until completion. 
+  
+
+## AWS
+
+The stack consists of
+
+1. Classic Elastic Load Balancer, 
+2. Launch Configuration, and 
+3. Auto Scaling Group. 
+
+They're configured to span multiple AZs and by configuring min, max, desired accordingly we can achieve HA in case of AZ loss (e.g. 3 min, 9max, 3 desired).
+
+Could be improved by moving instances to a private subnet in the respective az.
+
 ## Others
 
 S3 is used to store Terraform state between executions (from CI or locally).
