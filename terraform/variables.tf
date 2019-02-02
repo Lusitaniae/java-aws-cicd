@@ -34,7 +34,7 @@ variable "asg_min" {
 
 variable "asg_max" {
   description = "Max numbers of servers in ASG"
-  default     = "2"
+  default     = "3"
 }
 
 variable "asg_desired" {
