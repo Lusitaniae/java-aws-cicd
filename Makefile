@@ -1,3 +1,9 @@
+install:
+	cd app && ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+test: install
+	cd app && ./mvnw test -B
+
 bake:
 	packer build -var 'aws_access_key=${AWS_ACCESS_KEY}' -var 'aws_secret_key=${AWS_SECRET_KEY}' packer.json
 

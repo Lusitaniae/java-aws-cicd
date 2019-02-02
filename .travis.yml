@@ -18,23 +18,18 @@ before_script:
  # Installs Packer and Terraform used in deployment steps
  - ansible-playbook -i localhost ansible/prepare_deploy_server.yml
 
-install:
- - cd app && ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
 jobs:
  include:
 
-#  - stage: test
-#    name: Test App
-#    before_script: skip # needs change
-#    script: ./mvnw test -B
+  - stage: test
+    name: Test App
+    before_script: skip # needs change
+    script: make test
 
   - stage: deploy
-    name: Build Golden Image AMI
-    install: skip # maybe needs change  
+    name: Build AMI and deploy to ASG
     script: | 
       make bake
-      #cat manifest.json
       AMIID=$(cat manifest.json | jq -r .builds[0].artifact_id |  cut -d':' -f2)
       make deploy AMIID=$AMIID
 
