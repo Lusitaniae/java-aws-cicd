@@ -2,4 +2,5 @@
 - src: geerlingguy.java
 - src: tumf.systemd-service
 - src: robertdebock.bootstrap
+- src: robertdebock.terraform
 - src: geerlingguy.ansible-role-packer

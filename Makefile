@@ -1,2 +1,8 @@
 bake:
 	packer build -var 'aws_access_key=${AWS_ACCESS_KEY}' -var 'aws_secret_key=${AWS_SECRET_KEY}' packer.json
+
+deploy:
+	cd terraform; \
+	terraform init; \
+	terraform apply -input=false -auto-approve -var 'aws_amis={eu-west-1="'$(AMIID)'"}'
+

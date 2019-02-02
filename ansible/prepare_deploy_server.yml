@@ -1,9 +1,7 @@
-
 ---
-
-- hosts: all
+- hosts: localhost
   become: true
   roles:
     - { role: 'geerlingguy.ansible-role-packer', tags: ['packer'] }
-
+    - { role: 'robertdebock.terraform', tags: ['terraform'] }
 

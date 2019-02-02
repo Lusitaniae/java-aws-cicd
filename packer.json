@@ -22,5 +22,13 @@
       "type": "ansible",
       "playbook_file": "ansible/provision.yml"
     }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
   ]
+
 }
