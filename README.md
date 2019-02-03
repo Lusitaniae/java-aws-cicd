@@ -40,6 +40,7 @@ export AWS_SECRET_ACCESS_KEY="xyz"
 ## CI/CD Pipeline
 
 TravisCI is running the show.
+
 On commit and or PR, a pipeline with 2 stages is started.
 
 1. Test
@@ -48,12 +49,9 @@ On commit and or PR, a pipeline with 2 stages is started.
 	1. Build AMI using Packer (Ansible does the configuration)
 	2. Deploy new AMI to ASG using Terraform.
 
-Deployments are fully online.
+Deployments are fully online using Blue Green strategy.
 
-1. A new launch configuration is created with the newly baked AMI.
-2. ASG is attached the new launch configuration
-3.  The default ASG termination policy will now start creating new instances using the new AMI and destroying old ones until completion. 
-  
+New ASG and LC are configured with new AMI and once healthy they replace the original ones in the ELB.
 
 ## AWS
 
@@ -65,7 +63,7 @@ The stack consists of
 
 They're configured to span multiple AZs and by configuring min, max, desired accordingly we can achieve HA in case of AZ loss (e.g. 3 min, 9max, 3 desired).
 
-Could be improved by moving instances to a private subnet in the respective az.
+Could be improved by moving instances to a private subnet in the respective AZ to restrict access.
 
 ## Others
 
