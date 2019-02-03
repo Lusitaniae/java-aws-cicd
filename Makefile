@@ -10,5 +10,6 @@ bake:
 deploy:
 	cd terraform; \
 	terraform init; \
-	terraform apply -input=false -auto-approve -var 'aws_amis={eu-west-1="'$(AMIID)'"}'
+	terraform apply -input=false -auto-approve \
+	 -var 'aws_amis={eu-west-1="'$(AMIID)'"}' -var 'env="$(env)"'
 

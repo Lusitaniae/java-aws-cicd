@@ -27,9 +27,21 @@ jobs:
     script: make test
 
   - stage: deploy
-    name: Build AMI and deploy to ASG
+    name: Deploy production
     script: | 
-      make bake
-      AMIID=$(cat manifest.json | jq -r .builds[0].artifact_id |  cut -d':' -f2)
-      make deploy AMIID=$AMIID
+      #make bake
+      #AMIID=$(cat manifest.json | jq -r .builds[0].artifact_id |  cut -d':' -f2)
+      AMIID=ami-016434dc9b78a18c6
+      make deploy AMIID=$AMIID ENV=prod
+    if: branch = master
+
+  - stage: deploy
+    name: Deploy non production
+    script: |
+      #make bake
+      #AMIID=$(cat manifest.json | jq -r .builds[0].artifact_id |  cut -d':' -f2)
+      AMIID=ami-016434dc9b78a18c6
+      make deploy AMIID=$AMIID ENV=$TRAVIS_BRANCH
+    if: branch IN (sta, dev, test)
+
 
