@@ -83,14 +83,6 @@ resource "aws_security_group" "default" {
   name        = "opstest_sta_sg"
   description = "Used in the terraform"
 
-  # SSH access from anywhere
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   # HTTP access from anywhere
   ingress {
     from_port   = 80
