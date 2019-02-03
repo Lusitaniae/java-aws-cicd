@@ -41,3 +41,8 @@ variable "asg_desired" {
   description = "Desired numbers of servers in ASG"
   default     = "2"
 }
+
+variable "env" {
+  description = "Name of the environment"
+  default     = "sta" # dev, test, sta, prod
+}

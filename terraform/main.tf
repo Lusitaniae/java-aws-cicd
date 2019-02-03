@@ -2,7 +2,7 @@
 terraform {
   backend "s3" {
     bucket = "opstest-terra-state"
-    key    = "sta/terraform.tfstate"
+    key    = "${var.env}/terraform.tfstate"
     region = "eu-west-1"
   }
 }
@@ -13,8 +13,8 @@ provider "aws" {
 }
 
 resource "aws_elb" "web-elb" {
-  name = "opstest-sta-elb"
-  source_security_group = "opstest-sta-elb-sg"
+  name = "opstest-${var.env}-elb"
+  source_security_group = "opstest-${var.env}-elb-sg"
   # The same availability zone as our instances
   availability_zones = ["${split(",", var.availability_zones)}"]
 
@@ -63,7 +63,7 @@ resource "aws_autoscaling_group" "web-asg" {
 
 
 resource "aws_launch_configuration" "web-lc" {
-  name_prefix   = "opstest-sta-lc"
+  name_prefix   = "opstest-${var.env}-lc"
   image_id      = "${lookup(var.aws_amis, var.aws_region)}"
   instance_type = "${var.instance_type}"
 
@@ -80,7 +80,7 @@ resource "aws_launch_configuration" "web-lc" {
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "default" {
-  name        = "opstest_sta_sg"
+  name        = "opstest_${var.env}_sg"
   description = "Used in the terraform"
 
   # HTTP access from anywhere
