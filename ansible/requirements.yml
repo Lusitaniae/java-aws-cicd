@@ -1,4 +1,5 @@
 ---
+- src: dev-sec.ssh-hardening
 - src: geerlingguy.java
 - src: tumf.systemd-service
 - src: robertdebock.bootstrap

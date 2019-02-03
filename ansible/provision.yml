@@ -12,8 +12,10 @@
     systemd_service_Service_Group: "{{ app_name }}"
     systemd_service_Service_Restart: on-failure
     systemd_service_Service_WorkingDirectory: "/usr/local/bin/{{ app_name }}"
-
+    ufw_manage_defaults: false
+    
   roles: 
+    - { role: 'dev-sec.ssh-hardening', tags: ['hardening'] }
     - { role: 'tumf.systemd-service', tags: ['systemd'] }       
     - { role: 'geerlingguy.java', tags: ['java'] }
 
