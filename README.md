@@ -1,6 +1,17 @@
 
 # Java AWS CICD Pipeline Demo [![Build Status](https://travis-ci.com/Lusitaniae/java-aws-cicd.svg?branch=master)](https://travis-ci.com/Lusitaniae/java-aws-cicd)
 
+This project demonstrates a simple CI/CD pipeline for a java application. 
+
+Behind the scenes we're creating a VM which we configure and deploy the app,  and then we take a snapshot which is then deployed without downtime to a live cluster behind an AWS Load Balancer.
+
+You can targert multiple environments using different branches.
+1. master: production
+2. sta: staging
+3. test: testing
+4. dev: development
+
+You can skip CI builds by adding `[skip ci]` to your commit message.
 
 ## Get Started
 
