@@ -31,7 +31,7 @@ make bake
 ```
 Deploy Infrastructure (or changes only, say deploy new AMI)
 ```
-make deploy
+make deploy AMIID=ami-xxxxxxxxxxxx ENV=<prod|sta|test|dev>
 ```
 
 
