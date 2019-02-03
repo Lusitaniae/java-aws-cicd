@@ -2,7 +2,7 @@
 terraform {
   backend "s3" {
     bucket = "opstest-terra-state"
-    key    = "${var.env}/terraform.tfstate"
+    key    = "sta/terraform.tfstate"
     region = "eu-west-1"
   }
 }
