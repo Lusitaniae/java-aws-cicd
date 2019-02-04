@@ -15,6 +15,27 @@ You can skip CI builds by adding `[skip ci]` to your commit message.
 
 ## Get Started
 
+### Prerequisites
+
+Create two IAM users with the permissions linked below and export as env variables for local usage.
+
+Packer [(permissions)](https://www.packer.io/docs/builders/amazon.html#iam-task-or-instance-role):
+```
+export AWS_ACCESS_KEY="abc"
+export AWS_SECRET_KEY="xyz"
+```
+Terraform(Needs full rights to EC2, Auto Scaling, Launch Configuration, ELB, Security Groups, and the S3 bucket below):
+```
+export AWS_ACCESS_KEY_ID="abc"
+export AWS_SECRET_ACCESS_KEY="xyz"
+```
+Create an S3 bucket named (Terraform state is kept here between CI executions)
+```
+opstest-terra-state
+```
+
+### The fun part
+
 Pull repo
 ```
 git clone git@github.com:Lusitaniae/java-aws-cicd.git; cd java-aws-cicd
@@ -32,20 +53,6 @@ make bake
 Deploy Infrastructure (or changes only, say deploy new AMI)
 ```
 make deploy AMIID=ami-xxxxxxxxxxxx ENV=<prod|sta|test|dev>
-```
-
-
-Configure your env variables with access keys to your IAM users
-
-Packer [(permissions)](https://www.packer.io/docs/builders/amazon.html#iam-task-or-instance-role):
-```
-export AWS_ACCESS_KEY="abc"
-export AWS_SECRET_KEY="xyz"
-```
-Terraform[(permissions)](https://www.packer.io/docs/builders/amazon.html#iam-task-or-instance-role):
-```
-export AWS_ACCESS_KEY_ID="abc"
-export AWS_SECRET_ACCESS_KEY="xyz"
 ```
 
 ## CI/CD Pipeline
