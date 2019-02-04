@@ -22,7 +22,7 @@
   pre_tasks:
     - name: Update system packages
       apt:
-        #TODO upgrade: yes
+        upgrade: yes
         update_cache: yes
       tags: system_update
 
